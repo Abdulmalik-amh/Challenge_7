@@ -9,7 +9,7 @@ TerrainLayer:
   m_Name: LeafLayer
   m_DiffuseTexture: {fileID: 2800000, guid: b9495f4d735911641a727aea6657bba6, type: 3}
   m_NormalMapTexture: {fileID: 0}
-  m_MaskMapTexture: {fileID: 2800000, guid: 2fd8984464b2d8941b7e71b0a7f26fd3, type: 3}
+  m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 2, y: 2}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
