@@ -6,6 +6,7 @@ public class PlayerInfo : MonoBehaviour
     public int maxStamina = 50;
     public float staminaRegenRate = 5f;
     public float staminaRegenCooldown = 3f; // Cooldown time in seconds
+    [SerializeField] GameObject hitVFX;
 
     public float health;
     public float stamina;
@@ -112,5 +113,11 @@ public class PlayerInfo : MonoBehaviour
     {
         Debug.Log($"Health: {health}/{maxHealth}");
         Debug.Log($"Stamina: {stamina}/{maxStamina}");
+    }
+
+    public void HitVFX(Vector3 hitPosition)
+    {
+        GameObject hit = Instantiate(hitVFX, hitPosition, Quaternion.identity);
+        Destroy(hit, 3f);
     }
 }

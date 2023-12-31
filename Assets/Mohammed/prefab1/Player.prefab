@@ -582,6 +582,7 @@ GameObject:
   - component: {fileID: 2405180389604867257}
   - component: {fileID: 533389429762068481}
   - component: {fileID: 2088844511693293935}
+  - component: {fileID: 706311175372416306}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -675,7 +676,7 @@ MonoBehaviour:
   maxSpeed: 2
   walkingMultiplayer: 0.75
   crouchSpeedMultiplayer: 0.5
-  sprintSpeedMultiplier: 1.5
+  sprintSpeedMultiplier: 1.1
   dashSpeedMultiplier: 2
   dashDistance: 4
   dashDuration: 0.15
@@ -701,7 +702,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   targetLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 512
   enemyTarget_Locator: {fileID: 4183767600650458422, guid: dac1bc557c32c4ccebfcd427ac2a2170,
     type: 3}
   cinemachineAnimator: {fileID: 0}
@@ -730,9 +731,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  maxStamina: 50
+  maxStamina: 10000
   staminaRegenRate: 5
   staminaRegenCooldown: 3
+  hitVFX: {fileID: 1773777078157994072, guid: 5ee97ba44501f4ffd96c094ad4bd15a3, type: 3}
   health: 100
   stamina: 75
   regenerationTime: 1
@@ -750,11 +752,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853dd21f7b320489b81c11988992be49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
+  currentShield: {fileID: 0}
   parryHitbox: {fileID: 1365225310176626600}
+  attackType: 0
   parryHitboxLayer: 10
   parryHitboxDuration: 0.5
   block_Stamina: 0.01
-  attack_Stamina: 2
+  attack_Stamina: 0.1
   attackCooldownTimer: 1.25
 --- !u!114 &1032824288249764995
 MonoBehaviour:
@@ -930,6 +935,18 @@ MonoBehaviour:
   - {fileID: 206735156547003215}
   - {fileID: 2955355621301544102}
   - {fileID: 1269191713632054878}
+--- !u!114 &706311175372416306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123572956755322166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d196898a942f54b1b95d42899adda1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2141481055123771354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1465,7 @@ GameObject:
   - component: {fileID: 6173442513082178028}
   - component: {fileID: 208274619749128003}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Sowrd (Dummy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1466,7 +1483,8 @@ Transform:
   m_LocalPosition: {x: -0.358, y: 0.124, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 475573534482233800}
   m_Father: {fileID: 3022173673785911888}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &1301246197312493404
@@ -1534,7 +1552,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1572,6 +1590,53 @@ Transform:
   - {fileID: 206735156547003215}
   m_Father: {fileID: 2217935892158497983}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3749594339029137943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475573534482233800}
+  - component: {fileID: 6806717838838676756}
+  m_Layer: 0
+  m_Name: damageDealer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &475573534482233800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3749594339029137943}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.01, y: 0, z: -0.534}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3942661119713854367}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &6806717838838676756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3749594339029137943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c52eccd5eb384f24abfb64d5ef66005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponLength: 0.65
+  weaponWidth: 0.15
+  weaponDamage: 10
 --- !u!1 &3770537586050252946
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,7 +2251,7 @@ MonoBehaviour:
       m_Item7:
         transform: {fileID: 0}
         weight: 0
-    m_Offset: {x: 0, y: 0, z: 0}
+    m_Offset: {x: 0, y: 90, z: 0}
     m_MinLimit: -50
     m_MaxLimit: 50
     m_AimAxis: 5
@@ -3070,7 +3135,7 @@ GameObject:
   - component: {fileID: 2568773143366203475}
   - component: {fileID: 3756643607509325321}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Shield (Dummy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

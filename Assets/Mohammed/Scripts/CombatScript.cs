@@ -8,12 +8,15 @@ public class CombatScript : MonoBehaviour
     EnemyLockOn enemyLockOn;
     PlayerInfo playerInfo;
 
+    [SerializeField] GameObject currentWeapon;
+    [SerializeField] GameObject currentShield;
+    [SerializeField] GameObject parryHitbox;
     // Add a boolean variable to track whether the block button is held down
     private bool isBlocking = false;
     private bool isAttack = false;
 
+    public int attackType = 0;
     // Rename the variable for the parry hitbox
-    public GameObject parryHitbox;
     public int parryHitboxLayer = 10; // Set the default layer (adjust as needed)
     public float parryHitboxDuration = 0.5f; // Adjust as needed
     private float parryCooldown = 0.0f;
@@ -42,24 +45,25 @@ public class CombatScript : MonoBehaviour
         // Check for attacks
         if (Input.GetMouseButtonDown(0))
         {
-            if(abletoAttack && enemyLockOn.IsTargeting())
+            if (enemyLockOn.IsTargeting())
             {
-                // Left click for light attack
+                //StartCoroutine(CheckAttackType());
                 animator.SetInteger("AttackType", 1);
+                attackType = 1;
+                animator.SetTrigger("Attack");
                 playerInfo.TakeStamina(attack_Stamina);
                 isAttack = true;
                 abletoAttack = false;
                 StartCoroutine(AttackCoolDown());
             }
         }
-        else
+        else if (Input.GetMouseButtonUp(0) && isAttack)
         {
-            // Reset the AttackType parameter if no attack input
-            animator.SetInteger("AttackType", 0);
-            isAttack = false;
+            // Release of the left mouse button, stop the coroutine
+            StopCoroutine(CheckAttackType());
         }
 
-        if( isAttack)
+        if ( isAttack)
         {
             playerInfo.TakeStamina(attack_Stamina);
         }
@@ -98,6 +102,7 @@ public class CombatScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F))
         {
             animator.SetBool("Cancle",true);
+            abletoAttack = true;
         }
         else
         {
@@ -110,7 +115,40 @@ public class CombatScript : MonoBehaviour
         }
     }
 
-    public IEnumerator AttackCoolDown()
+    IEnumerator CheckAttackType()
+    {
+        float holdTime = 0f;
+
+        while (Input.GetMouseButton(0))
+        {
+            holdTime += Time.deltaTime;
+            yield return null;
+        }
+
+        if (holdTime < 0.5f)
+        {
+            // Short press, light attack
+            animator.SetInteger("AttackType", 1);
+            attackType = 1;
+            animator.SetTrigger("Attack");
+            playerInfo.TakeStamina(attack_Stamina);
+            isAttack = true;
+            abletoAttack = false;
+            StartCoroutine(AttackCoolDown());
+        }
+        else
+        {
+            // Long press, heavy attack
+            animator.SetInteger("AttackType", 2);
+            attackType = 2;
+            animator.SetTrigger("Attack");
+            playerInfo.TakeStamina(attack_Stamina * 1.5f); // Adjust stamina cost as needed
+            isAttack = true;
+            abletoAttack = false;
+            StartCoroutine(AttackCoolDown());
+        }
+    }
+        public IEnumerator AttackCoolDown()
     {
         yield return new WaitForSeconds(attackCooldownTimer);
         abletoAttack = true;
