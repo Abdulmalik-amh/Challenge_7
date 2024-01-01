@@ -24,4 +24,9 @@ public class animationEvents : MonoBehaviour
     {
         damageDealer.EndDealDamage();
     }
+
+    public void EndAttack()
+    {
+        combatScript.EnableAttack();
+    }
 }

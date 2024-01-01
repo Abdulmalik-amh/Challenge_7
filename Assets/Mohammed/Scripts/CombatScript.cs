@@ -47,14 +47,7 @@ public class CombatScript : MonoBehaviour
         {
             if (enemyLockOn.IsTargeting())
             {
-                //StartCoroutine(CheckAttackType());
-                animator.SetInteger("AttackType", 1);
-                attackType = 1;
-                animator.SetTrigger("Attack");
-                playerInfo.TakeStamina(attack_Stamina);
-                isAttack = true;
-                abletoAttack = false;
-                StartCoroutine(AttackCoolDown());
+                StartCoroutine(CheckAttackType());
             }
         }
         else if (Input.GetMouseButtonUp(0) && isAttack)
@@ -134,7 +127,7 @@ public class CombatScript : MonoBehaviour
             playerInfo.TakeStamina(attack_Stamina);
             isAttack = true;
             abletoAttack = false;
-            StartCoroutine(AttackCoolDown());
+            
         }
         else
         {
@@ -145,14 +138,15 @@ public class CombatScript : MonoBehaviour
             playerInfo.TakeStamina(attack_Stamina * 1.5f); // Adjust stamina cost as needed
             isAttack = true;
             abletoAttack = false;
-            StartCoroutine(AttackCoolDown());
+           
         }
     }
-        public IEnumerator AttackCoolDown()
+
+    public void EnableAttack()
     {
-        yield return new WaitForSeconds(attackCooldownTimer);
         abletoAttack = true;
     }
+
     // Add a Block method that can be called from other scripts or events
     public void Block()
     {
@@ -172,5 +166,10 @@ public class CombatScript : MonoBehaviour
     public bool returnBlock()
     {
         return isBlocking;
+    }
+
+    public void getBlocked()
+    {
+        animator.SetTrigger("Blocked");
     }
 }

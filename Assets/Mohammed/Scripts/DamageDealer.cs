@@ -22,26 +22,44 @@ public class DamageDealer : MonoBehaviour
 
     void Update()
     {
+        DealAttack();
+    }
+
+    public void DealAttack()
+    {
         if (canDealDamage)
         {
             RaycastHit hit;
 
-            int layerMask = 1 << 9;
+            // Combine layers 9 and 10 in the layer mask
+            int layerMask = (1 << 9);
+
             if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
-                if (hit.transform.TryGetComponent(out PlayerInfo enemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                // Check if the hit object has a specific tag (e.g., "Shield")
+                if (hit.transform.CompareTag("Shield"))
                 {
-                   
+                    // Handle the case where the hit object has the "Shield" tag
+                    Debug.Log("Hit a block shield!");
+                    hit.transform.GetComponent<CombatScript>().getBlocked();
+                    // You may want to add further logic for shield interactions here
+                }
+                else
+                {
+                    // Check if the hit object is an enemy and hasn't received damage yet
+                    if (hit.transform.TryGetComponent(out PlayerInfo enemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                    {
                         enemy.TakeDamage(weaponDamage);
-                        Debug.Log("Damage dealt" + weaponDamage);
-                    
-                    
-                    enemy.HitVFX(hit.point);
-                    hasDealtDamage.Add(hit.transform.gameObject);
+                        Debug.Log("Damage dealt: " + weaponDamage);
+                        enemy.HitVFX(hit.point);
+                        hasDealtDamage.Add(hit.transform.gameObject);
+                    }
                 }
             }
         }
     }
+
+
 
     public void StartDealDamage()
     {

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
+    Animator animator;
+
     public int maxHealth = 100;
     public int maxStamina = 50;
     public float staminaRegenRate = 5f;
@@ -28,6 +30,7 @@ public class PlayerInfo : MonoBehaviour
 
         // Set the initial regeneration start time
         regenerationStartTime = Time.time + regenerationTime;
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -73,6 +76,7 @@ public class PlayerInfo : MonoBehaviour
     {
         health -= damage;
         health = Mathf.Clamp(health, 0, maxHealth);
+        animator.SetTrigger("getHit"); 
     }
 
     public bool TakeStamina(float staminaCost)
