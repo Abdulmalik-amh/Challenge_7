@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 3535754234177203182}
   - component: {fileID: 1814739811709594460}
   - component: {fileID: 5897035602194461641}
+  - component: {fileID: 1080562252886213465}
   - component: {fileID: 5282509754330071080}
   - component: {fileID: 4391315499881028255}
   - component: {fileID: 854103259284969291}
@@ -459,6 +460,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d196898a942f54b1b95d42899adda1bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1080562252886213465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636552106591314590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c2eb983d43543589497afccc13fc46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5282509754330071080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,13 +576,13 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: getHit
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 0
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 1
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 2
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 3
 --- !u!1 &666947396231195208
 GameObject:
