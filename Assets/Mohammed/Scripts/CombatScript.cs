@@ -176,4 +176,5 @@ public class CombatScript : MonoBehaviour
     {
         animator.SetTrigger("Blocked");
     }
+
 }

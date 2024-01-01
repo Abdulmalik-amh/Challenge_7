@@ -124,4 +124,10 @@ public class PlayerInfo : MonoBehaviour
         GameObject hit = Instantiate(hitVFX, hitPosition, Quaternion.identity);
         Destroy(hit, 3f);
     }
+
+    public void Kicked()
+    {
+        animator.SetTrigger("Kicked");
+        TakeDamage(10f);
+    }
 }
