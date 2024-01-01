@@ -36,8 +36,9 @@ public class CombatScript : MonoBehaviour
         parryHitbox.layer = parryHitboxLayer;
     }
 
-    void Update()
+    public void HandleAllCombatScripts()
     {
+
         // Get cursor location for the Stance parameter
         int cursorLocation = enemyLockOn.GetCursorLocation();
         animator.SetInteger("Stance", cursorLocation);
@@ -56,7 +57,7 @@ public class CombatScript : MonoBehaviour
             StopCoroutine(CheckAttackType());
         }
 
-        if ( isAttack)
+        if (isAttack)
         {
             playerInfo.TakeStamina(attack_Stamina);
         }
@@ -72,7 +73,7 @@ public class CombatScript : MonoBehaviour
             parryHitbox.SetActive(true);
             // Set a cooldown before the player can parry again
             parryCooldown = Time.time + parryHitboxDuration + 2.0f; // You can adjust the cooldown duration
-            
+
         }
         else if (!Input.GetMouseButton(1))
         {
@@ -81,7 +82,7 @@ public class CombatScript : MonoBehaviour
             animator.SetBool("IsBlocking", false);
         }
 
-        if(isBlocking)
+        if (isBlocking)
         {
             playerInfo.TakeStamina(block_Stamina);
         }
@@ -92,9 +93,9 @@ public class CombatScript : MonoBehaviour
             parryHitbox.SetActive(false);
         }
 
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            animator.SetBool("Cancle",true);
+            animator.SetBool("Cancle", true);
             abletoAttack = true;
         }
         else
@@ -102,10 +103,13 @@ public class CombatScript : MonoBehaviour
             animator.SetBool("Cancle", false);
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             animator.SetTrigger("Kick");
         }
+    }
+    void Update()
+    {
     }
 
     IEnumerator CheckAttackType()

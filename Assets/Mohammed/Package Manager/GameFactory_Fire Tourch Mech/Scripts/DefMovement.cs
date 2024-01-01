@@ -52,7 +52,8 @@ public class DefMovement : MonoBehaviour
         enemyLockOn = GetComponent<EnemyLockOn>(); // Add this line
     }
 
-    void Update()
+
+    public void HandleAllDefMovement()
     {
         GetInput();
         PlayerMovement();
@@ -74,6 +75,10 @@ public class DefMovement : MonoBehaviour
 
         // Update the sliders
         UpdateSliders();
+    }
+    void Update()
+    {
+        
     }
 
 

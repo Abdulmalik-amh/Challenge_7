@@ -55,7 +55,7 @@ public class EnemyLockOn : MonoBehaviour
         targetCamV = targetCam.GetComponent<CinemachineVirtualCamera>();
     }
 
-    void Update()
+    public void HandleAlEnemylLockOn()
     {
         camFollow.lockedTarget = enemyLocked;
         defMovement.lockMovement = enemyLocked;
@@ -67,7 +67,7 @@ public class EnemyLockOn : MonoBehaviour
                 ResetTarget();
                 return;
             }
-            
+
             if (currentTarget = ScanNearBy()) FoundTarget(); else ResetTarget();
         }
 
@@ -106,6 +106,11 @@ public class EnemyLockOn : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+    }
+
+    void Update()
+    {
+        
     }
 
     public void DisplayCursorLocation()

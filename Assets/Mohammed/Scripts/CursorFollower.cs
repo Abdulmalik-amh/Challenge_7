@@ -1,11 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class CursorFollower : MonoBehaviour
 {
+
+    PhotonView view;
+    
+
+    private void Awake()
+    {
+        view = GetComponent<PhotonView>();
+    }
     public float mousePositionZ;
     void Update()
     {
+        if (!view.IsMine)
+            return;
+
         // Get the current mouse position in screen coordinates
         Vector3 mousePosition = Input.mousePosition;
 

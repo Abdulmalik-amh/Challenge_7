@@ -25,13 +25,12 @@ public class MouseAim : MonoBehaviour
         RmultiAimConstraint = Raim.GetComponent<MultiAimConstraint>();
     }
 
-
-    void Update()
+    public void HandleAllMouseAim()
     {
         isAim = enemyLockOn.IsTargeting();
         isShield = combatScript.returnBlock();
 
-        if(isAim)
+        if (isAim)
         {
             if (isShield)
             {
@@ -49,6 +48,10 @@ public class MouseAim : MonoBehaviour
             RmultiAimConstraint.weight = 0.1f;
             LmultiAimConstraint.weight = 0.1f;
         }
+    }
+    void Update()
+    {
+        
     }
 
 }

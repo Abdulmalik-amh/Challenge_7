@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class CameraFollow : MonoBehaviour
 {
+    PhotonView view;
     [SerializeField] Transform target;
     [SerializeField] Vector3 offset;
     [SerializeField] Vector2 clampAxis = new Vector2(60, 60);
@@ -19,9 +21,17 @@ public class CameraFollow : MonoBehaviour
 
     public bool lockedTarget;
 
+    private void Awake()
+    {
+        view = GetComponent<PhotonView>();
+    }
+
     void Start(){
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        if (!view.IsMine)
+            return;
         cam = Camera.main.transform;
     }
     void Update()
