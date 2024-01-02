@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       rig.enabled = true;
+       rig.enabled = false;
     }
 
     // Update is called once per frame
@@ -49,5 +49,12 @@ public class PlayerManager : MonoBehaviour
 
         defMovement.HandleAllDefMovement();
         combatScript.HandleAllCombatScripts();
+        StartCoroutine(RigStart());
+    }
+
+
+    IEnumerator RigStart()
+    {
+        yield return new WaitForSeconds(4);
     }
 }

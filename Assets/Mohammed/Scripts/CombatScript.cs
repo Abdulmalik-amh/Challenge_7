@@ -64,7 +64,7 @@ public class CombatScript : MonoBehaviour
         }
 
         // Check for block input (holding down the "E" key)
-        if (Input.GetMouseButton(1) && !isBlocking && Time.time > parryCooldown && playerInfo.stamina != 0f)
+        if (Input.GetMouseButton(1) && !isBlocking && playerInfo.stamina != 0f)
         {
             // Set the blocking parameter in the animator
             isBlocking = true;
