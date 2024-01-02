@@ -49,20 +49,15 @@ public class CombatScript : MonoBehaviour
         {
             if (enemyLockOn.IsTargeting())
             {
-                StartCoroutine(CheckAttackType());
+                animator.SetInteger("AttackType", 1);
+                attackType = 1;
+                animator.SetTrigger("Attack");
+                playerInfo.TakeStamina(attack_Stamina);
+                isAttack = true;
+                abletoAttack = false;
             }
         }
-        else if (Input.GetMouseButtonUp(0) && isAttack)
-        {
-            // Release of the left mouse button, stop the coroutine
-            StopCoroutine(CheckAttackType());
-        }
-
-        if (isAttack)
-        {
-            playerInfo.TakeStamina(attack_Stamina);
-        }
-
+        
         // Check for block input (holding down the "E" key)
         if (Input.GetMouseButton(1) && !isBlocking && playerInfo.stamina != 0f)
         {
@@ -111,41 +106,6 @@ public class CombatScript : MonoBehaviour
     }
     void Update()
     {
-    }
-
-    IEnumerator CheckAttackType()
-    {
-        float holdTime = 0f;
-
-        while (Input.GetMouseButton(0))
-        {
-            holdTime += Time.deltaTime;
-            yield return null;
-        }
-
-        if (holdTime < 0.5f)
-        {
-            // Short press, light attack
-            animator.SetInteger("AttackType", 1);
-            attackType = 1;
-            animator.SetTrigger("Attack");
-            playerInfo.TakeStamina(attack_Stamina);
-            isAttack = true;
-            abletoAttack = false;
-            
-        }
-        else
-        {
-            // Long press, heavy attack
-            animator.SetInteger("AttackType", 2);
-            attackType = 2;
-            animator.SetTrigger("Attack");
-            playerInfo.TakeStamina(attack_Stamina * 1.5f); // Adjust stamina cost as needed
-            isAttack = true;
-            abletoAttack = false;
-           
-        }
-       
     }
 
     public void EnableAttack()
