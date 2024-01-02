@@ -133,8 +133,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236601604900660993}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.08588676, y: 0.96813107, z: -0.1685834, w: -0.16408977}
-  m_LocalPosition: {x: 0.9952109, y: 0.61213326, z: 2.4298418}
+  m_LocalRotation: {x: -0.07799132, y: 0.9305183, z: -0.17613478, w: -0.31149563}
+  m_LocalPosition: {x: 1.7547576, y: 0.65509415, z: 1.9067936}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2013,6 +2013,7 @@ GameObject:
   - component: {fileID: 8413239423431431518}
   - component: {fileID: 2359059063929351173}
   - component: {fileID: 1616011920039742104}
+  - component: {fileID: 6945761514488359307}
   m_Layer: 6
   m_Name: Cursor
   m_TagString: Untagged
@@ -2108,10 +2109,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 6945761514488359307}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6945761514488359307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979170598202170018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &1991274101907087859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,6 +2613,7 @@ GameObject:
   - component: {fileID: 8624201805147893702}
   - component: {fileID: 3446995186849983059}
   - component: {fileID: 854216461522524975}
+  - component: {fileID: 8203866071992664764}
   m_Layer: 0
   m_Name: GeneralCursor
   m_TagString: Untagged
@@ -2648,10 +2667,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 8203866071992664764}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8203866071992664764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3024504371350625674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &3060204265149707710
 GameObject:
   m_ObjectHideFlags: 0
