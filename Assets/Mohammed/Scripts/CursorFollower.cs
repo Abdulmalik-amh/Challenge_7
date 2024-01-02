@@ -2,12 +2,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class CursorFollower : MonoBehaviour
+public class CursorFollower : MonoBehaviourPun, IPunObservable
 {
 
     PhotonView view;
     
-
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+       else if (stream.IsReading) 
+        {
+            transform.position = (Vector3)stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
+        }
+    }
     private void Awake()
     {
         view = GetComponent<PhotonView>();
@@ -16,7 +28,7 @@ public class CursorFollower : MonoBehaviour
     void Update()
     {
         if (!view.IsMine)
-            return;
+            Destroy(gameObject);
 
         // Get the current mouse position in screen coordinates
         Vector3 mousePosition = Input.mousePosition;
@@ -31,4 +43,6 @@ public class CursorFollower : MonoBehaviour
         transform.position = worldPosition;
 
     }
+
+    
 }
