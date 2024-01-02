@@ -5,7 +5,7 @@ using Photon.Pun;
 using UnityEngine.Animations.Rigging;
 using Unity.VisualScripting;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviourPun, IPunObservable
 {
     PhotonView view;
     DefMovement defMovement;
@@ -57,5 +57,20 @@ public class PlayerManager : MonoBehaviour
     {
         yield return new WaitForSeconds(4);
         rig.enabled = true;
+    }
+
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else if (stream.IsReading)
+        {
+            transform.position = (Vector3)stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
+        }
     }
 }
