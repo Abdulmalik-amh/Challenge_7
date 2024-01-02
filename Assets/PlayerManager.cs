@@ -56,5 +56,6 @@ public class PlayerManager : MonoBehaviour
     IEnumerator RigStart()
     {
         yield return new WaitForSeconds(4);
+        rig.enabled = true;
     }
 }
