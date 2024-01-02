@@ -38,7 +38,8 @@ public class CombatScript : MonoBehaviour
 
     public void HandleAllCombatScripts()
     {
-
+        EnableAttack();
+        Block();
         // Get cursor location for the Stance parameter
         int cursorLocation = enemyLockOn.GetCursorLocation();
         animator.SetInteger("Stance", cursorLocation);
@@ -144,6 +145,7 @@ public class CombatScript : MonoBehaviour
             abletoAttack = false;
            
         }
+       
     }
 
     public void EnableAttack()

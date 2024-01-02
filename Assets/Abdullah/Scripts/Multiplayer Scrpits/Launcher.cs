@@ -33,6 +33,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     void Start()
     {
         Debug.Log("Connecting To Master");
+        PhotonNetwork.SendRate = 20; //20
+        PhotonNetwork.SerializationRate = 5; //10
         PhotonNetwork.ConnectUsingSettings();
         countToStart.SetActive(false);
     }

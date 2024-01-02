@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     EnemyLockOn enemyLockOn;
     CombatScript combatScript;
     MouseAim mouseAim;
+    animationEvents animationEv;
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class PlayerManager : MonoBehaviour
         enemyLockOn = GetComponent<EnemyLockOn>();
         combatScript = GetComponent<CombatScript>();
         mouseAim = GetComponent<MouseAim>();
+        animationEv = GetComponent<animationEvents>();
     }
     // Start is called before the first frame update
     void Start()

@@ -17,6 +17,8 @@ public class animationEvents : MonoBehaviour
         KickHandler = GetComponentInChildren<KickHandler>();
     }
 
+
+
     public void StartDealDamage()
     {
         damageDealer.StartDealDamage();

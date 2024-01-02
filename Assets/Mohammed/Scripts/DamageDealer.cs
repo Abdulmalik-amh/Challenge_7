@@ -32,7 +32,7 @@ public class DamageDealer : MonoBehaviour
             RaycastHit hit;
 
             // Combine layers 9 and 10 in the layer mask
-            int layerMask = (1 << 9);
+            int layerMask = (1 << 10) + (1 << 9);
 
             if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
