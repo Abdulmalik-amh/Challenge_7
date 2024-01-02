@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.Animations.Rigging;
+using Unity.VisualScripting;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     MouseAim mouseAim;
     animationEvents animationEv;
 
+    RigBuilder rig;
+
     private void Awake()
     {
         view = GetComponent<PhotonView>();
@@ -20,11 +24,12 @@ public class PlayerManager : MonoBehaviour
         combatScript = GetComponent<CombatScript>();
         mouseAim = GetComponent<MouseAim>();
         animationEv = GetComponent<animationEvents>();
+        rig = GetComponent<RigBuilder>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+       rig.enabled = true;
     }
 
     // Update is called once per frame
