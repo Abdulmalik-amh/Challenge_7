@@ -633,6 +633,7 @@ MonoBehaviour:
   currentWeapon: {fileID: 0}
   currentShield: {fileID: 0}
   parryHitbox: {fileID: 3866278042296884489}
+  hitVFX: {fileID: 1000011945391522, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e, type: 3}
   attackType: 0
   parryHitboxLayer: 11
   parryHitboxDuration: 0.5

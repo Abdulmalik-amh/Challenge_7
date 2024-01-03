@@ -11,6 +11,7 @@ public class CombatScript : MonoBehaviour
     [SerializeField] GameObject currentWeapon;
     [SerializeField] GameObject currentShield;
     [SerializeField] GameObject parryHitbox;
+    [SerializeField] GameObject hitVFX;
     // Add a boolean variable to track whether the block button is held down
     private bool isBlocking = false;
     private bool isAttack = false;
@@ -91,8 +92,7 @@ public class CombatScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            animator.SetBool("Cancle", true);
-            abletoAttack = true;
+            CancleAttack();
         }
         else
         {
@@ -104,6 +104,13 @@ public class CombatScript : MonoBehaviour
             animator.SetTrigger("Kick");
         }
     }
+
+    public void CancleAttack()
+    {
+        animator.SetBool("Cancle", true);
+        abletoAttack = true;
+    }
+
     void Update()
     {
     }
@@ -139,4 +146,9 @@ public class CombatScript : MonoBehaviour
         animator.SetTrigger("Blocked");
     }
 
+    public void HitVFX(Vector3 hitPosition)
+    {
+        GameObject hit = Instantiate(hitVFX, hitPosition, Quaternion.identity);
+        Destroy(hit, 1f);
+    }
 }

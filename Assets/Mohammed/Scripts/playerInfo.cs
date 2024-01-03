@@ -122,7 +122,7 @@ public class PlayerInfo : MonoBehaviour
     public void HitVFX(Vector3 hitPosition)
     {
         GameObject hit = Instantiate(hitVFX, hitPosition, Quaternion.identity);
-        Destroy(hit, 3f);
+        Destroy(hit, 1f);
     }
 
     public void Kicked()
