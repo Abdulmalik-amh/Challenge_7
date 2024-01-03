@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator RigStart()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(5);
         rigBuilder.enabled = true;
     }
 
