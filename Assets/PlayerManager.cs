@@ -47,12 +47,13 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        StartCoroutine(RigStart());
         if (!view.IsMine)
             return;
 
         defMovement.HandleAllDefMovement();
         combatScript.HandleAllCombatScripts();
-        StartCoroutine(RigStart());
+        
     }
 
 
