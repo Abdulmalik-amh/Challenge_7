@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class CursorFollower : MonoBehaviourPun, IPunObservable
+public class CursorFollower : MonoBehaviour
 {
 
     PhotonView view;
@@ -32,8 +32,4 @@ public class CursorFollower : MonoBehaviourPun, IPunObservable
 
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        throw new System.NotImplementedException();
-    }
 }

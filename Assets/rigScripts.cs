@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.Animations.Rigging;
 
-public class rigScripts : MonoBehaviourPun, IPunObservable
+public class rigScripts : MonoBehaviour
 {
 
     Rig rig;
@@ -24,16 +24,5 @@ public class rigScripts : MonoBehaviourPun, IPunObservable
         
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(rig.weight);
-        }
-        else if (stream.IsReading)
-        {
-            rig.weight = (float)stream.ReceiveNext();
-            //transform.rotation = (Quaternion)stream.ReceiveNext();
-        }
-    }
+
 }

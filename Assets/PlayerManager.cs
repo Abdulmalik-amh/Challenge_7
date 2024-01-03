@@ -62,6 +62,4 @@ public class PlayerManager : MonoBehaviour
         rigBuilder.enabled = true;
     }
 
-
-   
 }
