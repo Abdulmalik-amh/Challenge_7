@@ -133,8 +133,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236601604900660993}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.08661178, y: 0.9708638, z: -0.16749279, w: -0.14787856}
-  m_LocalPosition: {x: 0.904984, y: 0.60302716, z: 2.472261}
+  m_LocalRotation: {x: -0.086807474, y: 0.9718306, z: -0.16672167, w: -0.14217518}
+  m_LocalPosition: {x: 0.90313935, y: 0.60121506, z: 2.477331}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6614,7 +6614,7 @@ GameObject:
   - component: {fileID: 922945977238676618}
   - component: {fileID: 7388485195283012999}
   - component: {fileID: 3230413308186117614}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Shield (Dummy)
   m_TagString: Shield
   m_Icon: {fileID: 0}

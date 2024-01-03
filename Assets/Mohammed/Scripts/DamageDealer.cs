@@ -32,12 +32,13 @@ public class DamageDealer : MonoBehaviour
             RaycastHit hit;
 
             // Combine layers 9 and 10 in the layer mask
-            int layerMask = (1 << 10) + (1 << 9);
+            int layerMask = (1 << 10) + (1 << 9) + (1 << 12);
 
             if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
+                int ShieldMask = (1 << 12);
                 // Check if the hit object has a specific tag (e.g., "Shield")
-                if (hit.transform.TryGetComponent(out CombatScript Aenemy) && !hasDealtDamage.Contains(hit.transform.gameObject) && CompareTag("Shield"))
+                if (hit.transform.TryGetComponent(out CombatScript Aenemy) && !hasDealtDamage.Contains(hit.transform.gameObject) && Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
                 {
                     // Handle the case where the hit object has the "Shield" tag
                     Debug.Log("Hit a block shield!");
