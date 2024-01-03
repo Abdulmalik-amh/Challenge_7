@@ -15,7 +15,8 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
     MouseAim mouseAim;
     animationEvents animationEv;
 
-    RigBuilder rig;
+    RigBuilder rigBuilder;
+    public Rig rig;
 
     private void Awake()
     {
@@ -25,12 +26,14 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
         combatScript = GetComponent<CombatScript>();
         mouseAim = GetComponent<MouseAim>();
         animationEv = GetComponent<animationEvents>();
-        rig = GetComponent<RigBuilder>();
+        rigBuilder = GetComponent<RigBuilder>();
     }
     // Start is called before the first frame update
     void Start()
     {
        rig.enabled = false;
+
+
     }
 
     // Update is called once per frame
@@ -65,14 +68,13 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(rig.transform.position);
-            stream.SendNext(rig.transform.rotation);
+            stream.SendNext(rig.weight);
             //stream.sendnext(transform.rotation);
         }
         else if (stream.IsReading)
         {
-            transform.position = (Vector3)stream.ReceiveNext();
-            transform.rotation = (Quaternion)stream.ReceiveNext();
+            rig.weight = (float)stream.ReceiveNext();
+            //transform.rotation = (Quaternion)stream.ReceiveNext();
         }
     }
 }

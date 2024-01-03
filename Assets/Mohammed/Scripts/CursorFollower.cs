@@ -2,24 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class CursorFollower : MonoBehaviourPun, IPunObservable
+public class CursorFollower : MonoBehaviour
 {
 
     PhotonView view;
     
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
-        }
-       else if (stream.IsReading) 
-        {
-            transform.position = (Vector3)stream.ReceiveNext();
-            transform.rotation = (Quaternion)stream.ReceiveNext();
-        }
-    }
+    
     private void Awake()
     {
         view = GetComponent<PhotonView>();
