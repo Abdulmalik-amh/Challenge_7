@@ -6,7 +6,7 @@ using UnityEngine.Animations.Rigging;
 using Unity.VisualScripting;
 using System;
 
-public class PlayerManager : MonoBehaviourPun, IPunObservable
+public class PlayerManager : MonoBehaviour
 {
     PhotonView view;
     DefMovement defMovement;
@@ -16,7 +16,6 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
     animationEvents animationEv;
 
     RigBuilder rigBuilder;
-   public Rig rig;
 
     private void Awake()
     {
@@ -27,7 +26,6 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
         mouseAim = GetComponent<MouseAim>();
         animationEv = GetComponent<animationEvents>();
         rigBuilder = GetComponent<RigBuilder>();
-        rig = GetComponent<Rig>();
     }
     // Start is called before the first frame update
     void Start()
@@ -65,17 +63,5 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
     }
 
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(rig.weight);
-            //stream.sendnext(transform.rotation);
-        }
-        else if (stream.IsReading)
-        {
-            rig.weight = (float)stream.ReceiveNext();
-            //transform.rotation = (Quaternion)stream.ReceiveNext();
-        }
-    }
+   
 }
