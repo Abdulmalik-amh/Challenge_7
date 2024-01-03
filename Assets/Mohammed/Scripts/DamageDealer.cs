@@ -43,6 +43,7 @@ public class DamageDealer : MonoBehaviour
                     Debug.Log("Hit a block shield!");
                     Aenemy.getBlocked();
                     combatScript.CancleAttack();
+                    combatScript.HitVFX(hit.point);
                     
                     // You may want to add further logic for shield interactions here
                 }
