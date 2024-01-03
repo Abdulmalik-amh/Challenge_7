@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 854103259284969291}
   - component: {fileID: -7598631108044289747}
   - component: {fileID: 3418564309416168607}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -580,7 +580,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   targetLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   enemyTarget_Locator: {fileID: 4183767600650458422, guid: dac1bc557c32c4ccebfcd427ac2a2170,
     type: 3}
   cinemachineAnimator: {fileID: 5616777093278049706}
