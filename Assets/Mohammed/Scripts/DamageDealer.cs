@@ -18,6 +18,16 @@ public class DamageDealer : MonoBehaviour
 
         playerInfo = GetComponentInParent<PlayerInfo>();
         combatScript = GetComponentInParent<CombatScript>();
+
+        if (playerInfo == null)
+        {
+            Debug.LogError("PlayerInfo component not found in parent objects.");
+        }
+
+        if (combatScript == null)
+        {
+            Debug.LogError("CombatScript component not found in parent objects.");
+        }
     }
 
     void Update()
