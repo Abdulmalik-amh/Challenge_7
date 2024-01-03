@@ -133,8 +133,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236601604900660993}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.086807474, y: 0.9718306, z: -0.16672167, w: -0.14217518}
-  m_LocalPosition: {x: 0.90313935, y: 0.60121506, z: 2.477331}
+  m_LocalRotation: {x: -0.08648074, y: 0.9706639, z: -0.16722596, w: -0.14956024}
+  m_LocalPosition: {x: 0.9407958, y: 0.60499084, z: 2.4596665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3233,9 +3233,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1566663645871368276}
   - component: {fileID: 1637032193811237007}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: ParryHB
-  m_TagString: Untagged
+  m_TagString: Parry
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6614,7 +6614,7 @@ GameObject:
   - component: {fileID: 922945977238676618}
   - component: {fileID: 7388485195283012999}
   - component: {fileID: 3230413308186117614}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Shield (Dummy)
   m_TagString: Shield
   m_Icon: {fileID: 0}
