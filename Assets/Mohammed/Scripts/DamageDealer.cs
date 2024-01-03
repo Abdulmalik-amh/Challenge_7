@@ -34,33 +34,32 @@ public class DamageDealer : MonoBehaviour
             // Combine layers 9 and 10 in the layer mask
             int layerMask = (1 << 10) + (1 << 9);
             int ShieldMask = (1 << 12);
-            int ParryMask = (1 << 11);
-            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
+            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask) || Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
             {
                
-                
-                         // Check if the hit object is an enemy and hasn't received damage yet
-                if (hit.transform.TryGetComponent(out PlayerInfo Benemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                // Check if the hit object has a specific tag (e.g., "Shield")
+                if (hit.transform.TryGetComponent(out CombatScript Aenemy) && !hasDealtDamage.Contains(hit.transform.gameObject) && Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
                 {
-                 Benemy.TakeDamage(weaponDamage);
-                 Debug.Log("Damage dealt: " + weaponDamage);
-                 Benemy.HitVFX(hit.point);
-                hasDealtDamage.Add(hit.transform.gameObject);
+                    // Handle the case where the hit object has the "Shield" tag
+                    Debug.Log("Hit a block shield!");
+                    Aenemy.getBlocked();
+                    combatScript.CancleAttack();
+                    combatScript.HitVFX(hit.point);
+                    
+                    // You may want to add further logic for shield interactions here
                 }
-                
+                else
+                {
+                    // Check if the hit object is an enemy and hasn't received damage yet
+                    if (hit.transform.TryGetComponent(out PlayerInfo Benemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                    {
+                        Benemy.TakeDamage(weaponDamage);
+                        Debug.Log("Damage dealt: " + weaponDamage);
+                        Benemy.HitVFX(hit.point);
+                        hasDealtDamage.Add(hit.transform.gameObject);
+                    }
+                }
             }
-            // Check if the hit object has a specific tag (e.g., "Shield")
-            else if (hit.transform.TryGetComponent(out CombatScript Aenemy) && !hasDealtDamage.Contains(hit.transform.gameObject) && Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
-            {
-                // Handle the case where the hit object has the "Shield" tag
-                Debug.Log("Hit a block shield!");
-                Aenemy.getBlocked();
-                combatScript.CancleAttack();
-                combatScript.HitVFX(hit.point);
-
-                // You may want to add further logic for shield interactions here
-            }
- 
         }
     }
 
