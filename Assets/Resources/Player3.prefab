@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
-  speed: 7
+  speed: 5
   camPlayer: {fileID: 201198530682766516}
 --- !u!23 &698557586902558359
 MeshRenderer:
