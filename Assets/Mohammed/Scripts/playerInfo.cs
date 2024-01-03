@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -20,8 +21,21 @@ public class PlayerInfo : MonoBehaviour
     public float regenerationRate;
     public float dashInterruptRegenTimeMultiplier = 2f;
 
+    PhotonView view;
+
+    PlayerControllerManager playerControllerManager;
+
+    private void Awake()
+    {
+        view = GetComponent<PhotonView>();
+
+
+        playerControllerManager = PhotonView.Find((int)view.InstantiationData[0]).GetComponent<PlayerControllerManager>();
+    }
     private void Start()
     {
+        
+
         // Initialize player stats
         health = maxHealth;
         stamina = maxStamina;
@@ -74,9 +88,25 @@ public class PlayerInfo : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        view.RPC("RPC_TakeDamage", RpcTarget.All, damage);
+    }
+
+    [PunRPC]
+    void RPC_TakeDamage(float damage)
+    {
         health -= damage;
-        health = Mathf.Clamp(health, 0, maxHealth);
-        animator.SetTrigger("getHit"); 
+        //health = Mathf.Clamp(health, 0, maxHealth);
+        animator.SetTrigger("getHit");
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        playerControllerManager.Die();
     }
 
     public bool TakeStamina(float staminaCost)

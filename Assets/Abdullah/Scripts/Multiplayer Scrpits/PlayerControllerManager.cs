@@ -43,7 +43,7 @@ public class PlayerControllerManager : MonoBehaviour
                 if (view.IsMine)
                 {
                 myPlayer =  PhotonNetwork.Instantiate(Path.Combine("Player"), RoomManager.Instance.spawnPointsTeamOne[spawnPicker].position,
-                        RoomManager.Instance.spawnPointsTeamOne[spawnPicker].rotation, 0);
+                        RoomManager.Instance.spawnPointsTeamOne[spawnPicker].rotation, 0, new object[] { view.ViewID });
                 }
 
 
@@ -55,10 +55,16 @@ public class PlayerControllerManager : MonoBehaviour
                 if (view.IsMine) 
                 {
                 myPlayer =  PhotonNetwork.Instantiate(Path.Combine("Player1"), RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].position,
-                    RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].rotation, 0);
+                    RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].rotation, 0, new object[] {view.ViewID});
                 }
             }
         
+    }
+
+    public void Die()
+    {
+        PhotonNetwork.Destroy(myPlayer);
+        CreatController();
     }
 
     [PunRPC]
