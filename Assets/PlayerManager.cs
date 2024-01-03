@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
        rigBuilder.enabled = false;
-
+        StartCoroutine(RigStart());
 
     }
 
@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        StartCoroutine(RigStart());
+        
         if (!view.IsMine)
             return;
 
