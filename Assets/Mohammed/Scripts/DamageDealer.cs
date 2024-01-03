@@ -37,7 +37,7 @@ public class DamageDealer : MonoBehaviour
             if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
                 // Check if the hit object has a specific tag (e.g., "Shield")
-                if (hit.transform.TryGetComponent(out CombatScript Aenemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                if (hit.transform.TryGetComponent(out CombatScript Aenemy) && !hasDealtDamage.Contains(hit.transform.gameObject) && CompareTag("Shield"))
                 {
                     // Handle the case where the hit object has the "Shield" tag
                     Debug.Log("Hit a block shield!");
