@@ -7,11 +7,11 @@ using UnityEngine.Animations.Rigging;
 public class rigScripts : MonoBehaviourPun, IPunObservable
 {
 
-    RigBuilder rig;
+    Rig rig;
     // Start is called before the first frame update
     void Start()
     {
-        rig = GetComponent<RigBuilder>();   
+        rig = GetComponent<Rig>();   
     }
 
     // Update is called once per frame
@@ -22,14 +22,14 @@ public class rigScripts : MonoBehaviourPun, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-    //     if (stream.IsWriting)
-    //     {
-    //        stream.SendNext(rig);
-    //    }
-    //    else if (stream.IsReading)
-    //    {
-    //        transform.position = (Vector3)stream.ReceiveNext();
-    //        transform.rotation = (Quaternion)stream.ReceiveNext();
-    //    }
+        //if (stream.IsWriting)
+        //{
+        //    stream.SendNext(rig.weight);
+        //}
+        //else if (stream.IsReading)
+        //{
+        //    rig.weight = (float)stream.ReceiveNext();
+        //    //transform.rotation = (Quaternion)stream.ReceiveNext();
+        //}
     }
 }

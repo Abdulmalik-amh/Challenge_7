@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
     animationEvents animationEv;
 
     RigBuilder rigBuilder;
-    public Rig rig;
+   public Rig rig;
 
     private void Awake()
     {
@@ -27,11 +27,12 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
         mouseAim = GetComponent<MouseAim>();
         animationEv = GetComponent<animationEvents>();
         rigBuilder = GetComponent<RigBuilder>();
+        rig = GetComponent<Rig>();
     }
     // Start is called before the first frame update
     void Start()
     {
-       rig.enabled = false;
+       rigBuilder.enabled = false;
 
 
     }
@@ -60,7 +61,7 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
     IEnumerator RigStart()
     {
         yield return new WaitForSeconds(4);
-        rig.enabled = true;
+        rigBuilder.enabled = true;
     }
 
 

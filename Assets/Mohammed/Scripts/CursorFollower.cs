@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class CursorFollower : MonoBehaviour
+public class CursorFollower : MonoBehaviourPunCallbacks
 {
 
     PhotonView view;
