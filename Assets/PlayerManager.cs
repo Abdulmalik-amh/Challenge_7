@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.Animations.Rigging;
 using Unity.VisualScripting;
+using System;
 
 public class PlayerManager : MonoBehaviourPun, IPunObservable
 {
@@ -62,15 +63,16 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-    //    if (stream.IsWriting)
-    //    {
-    //        stream.SendNext(transform.position);
-    //        stream.SendNext(transform.rotation);
-    //    }
-    //    else if (stream.IsReading)
-    //    {
-    //        transform.position = (Vector3)stream.ReceiveNext();
-    //        transform.rotation = (Quaternion)stream.ReceiveNext();
-    //    }
+        if (stream.IsWriting)
+        {
+            stream.SendNext(rig.transform.position);
+            stream.SendNext(rig.transform.rotation);
+            //stream.sendnext(transform.rotation);
+        }
+        else if (stream.IsReading)
+        {
+            transform.position = (Vector3)stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
+        }
     }
 }
