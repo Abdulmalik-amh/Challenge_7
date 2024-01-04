@@ -88,12 +88,13 @@ public class PlayerInfo : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        view.RPC("RPC_TakeDamage", RpcTarget.All, damage);
+        view.RPC(nameof(RPC_TakeDamage), view.Owner, damage);
     }
 
     [PunRPC]
-    void RPC_TakeDamage(float damage)
+    void RPC_TakeDamage(float damage, PhotonMessageInfo info)
     {
+
         health -= damage;
         //health = Mathf.Clamp(health, 0, maxHealth);
         animator.SetTrigger("getHit");
@@ -101,6 +102,7 @@ public class PlayerInfo : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            PlayerControllerManager.Find(info.Sender).GetKill();
         }
     }
 

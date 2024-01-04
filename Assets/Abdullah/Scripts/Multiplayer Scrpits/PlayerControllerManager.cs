@@ -4,14 +4,17 @@ using UnityEngine;
 using Photon.Pun;
 using System.IO;
 using Photon.Realtime;
+using System.Linq;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerControllerManager : MonoBehaviour
 {
    public PhotonView view;
     public GameObject myPlayer;
     public int myTeam;
- 
 
+    int kills;
+    int deaths;
     private void Awake()
     {
         view = GetComponent<PhotonView>();
@@ -65,6 +68,26 @@ public class PlayerControllerManager : MonoBehaviour
     {
         PhotonNetwork.Destroy(myPlayer);
         CreatController();
+
+        deaths++;
+
+        Hashtable hash = new Hashtable();
+        hash.Add("deaths", deaths);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+    }
+    public void GetKill()
+    {
+        view.RPC(nameof(RPC_GetKill), view.Owner);
+    }
+
+    [PunRPC]
+    void RPC_GetKill()
+    {
+        kills++;
+
+        Hashtable hash = new Hashtable();
+        hash.Add("kills", kills);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
     }
 
     [PunRPC]
@@ -80,4 +103,9 @@ public class PlayerControllerManager : MonoBehaviour
     {
         myTeam = whichteam;
     }
+
+    public static PlayerControllerManager Find(Player player)
+	{
+		return FindObjectsOfType<PlayerControllerManager>().SingleOrDefault(x => x.view.Owner == player);
+	}
 }
