@@ -12,12 +12,13 @@ public class rigScripts : MonoBehaviour
 
     private void Awake()
     {
+        view = GetComponent<PhotonView>();
         rig = GetComponent<Rig>();
     }
     void Start()
     {
         if (!view.IsMine)
-            Destroy(gameObject);
+            return;
     }
 
     // Update is called once per frame
