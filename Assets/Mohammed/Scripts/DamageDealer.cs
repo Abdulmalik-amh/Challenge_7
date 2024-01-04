@@ -19,7 +19,6 @@ public class DamageDealer : MonoBehaviour
 
         playerInfo = GetComponentInParent<PlayerInfo>();
         combatScript = GetComponentInParent<CombatScript>();
-        enemyLockOn = GetComponent<EnemyLockOn>();
     }
 
     void Update()
@@ -70,7 +69,7 @@ public class DamageDealer : MonoBehaviour
         //Debug.Log("Start Dealing Damage");
         canDealDamage = true;
         hasDealtDamage.Clear();
-        enemyLockOn.FreezeTargetLock();
+
     }
 
     public void EndDealDamage()
@@ -78,7 +77,6 @@ public class DamageDealer : MonoBehaviour
         //Debug.Log("End Dealing Damage");
 
         canDealDamage = false;
-        enemyLockOn.UnfreezeTargetLock();
     }
 
     private void OnDrawGizmos()
