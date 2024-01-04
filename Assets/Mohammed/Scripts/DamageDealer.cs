@@ -38,8 +38,10 @@ public class DamageDealer : MonoBehaviour
             if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
             {
                 Debug.Log("Hit Shield");
+
                 if (hit.transform.TryGetComponent(out CombatScript Aenemy))
                 {
+                    Debug.Log("CombatScript found on the hit object");
                     // Handle the case where the hit object has the "Shield" tag
                     Debug.Log("Hit a block shield!");
                     Aenemy.getBlocked();
@@ -47,6 +49,10 @@ public class DamageDealer : MonoBehaviour
                     combatScript.HitVFX(hit.point);
 
                     // You may want to add further logic for shield interactions here
+                }
+                else
+                {
+                    Debug.Log("CombatScript not found on the hit object");
                 }
             }
             else if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
