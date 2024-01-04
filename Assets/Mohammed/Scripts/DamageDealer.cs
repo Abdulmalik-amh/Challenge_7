@@ -30,13 +30,11 @@ public class DamageDealer : MonoBehaviour
         if (canDealDamage)
         {
             RaycastHit hit;
-
+            int ShieldMask = (1 << 12);
             // Combine layers 9 and 10 in the layer mask
             int layerMask = (1 << 10) + (1 << 9);
-
-            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
+            if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
             {
-                // Check if the hit object has a specific tag (e.g., "Shield")
                 if (hit.transform.TryGetComponent(out CombatScript Aenemy) && !hasDealtDamage.Contains(hit.transform.gameObject) && CompareTag("Shield"))
                 {
                     // Handle the case where the hit object has the "Shield" tag
@@ -44,11 +42,12 @@ public class DamageDealer : MonoBehaviour
                     Aenemy.getBlocked();
                     combatScript.CancleAttack();
                     combatScript.HitVFX(hit.point);
-                    
+
                     // You may want to add further logic for shield interactions here
                 }
-                else
-                {
+            }
+            else if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
+            {
                     // Check if the hit object is an enemy and hasn't received damage yet
                     if (hit.transform.TryGetComponent(out PlayerInfo Benemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
                     {
@@ -57,7 +56,7 @@ public class DamageDealer : MonoBehaviour
                         Benemy.HitVFX(hit.point);
                         hasDealtDamage.Add(hit.transform.gameObject);
                     }
-                }
+                
             }
         }
     }
