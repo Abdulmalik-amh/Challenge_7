@@ -47,7 +47,9 @@ public class PlayerInfo : MonoBehaviour
         regenerationStartTime = Time.time + regenerationTime;
         animator = GetComponent<Animator>();
 
-        team = (int)PhotonNetwork.LocalPlayer.CustomProperties["whichteam"];
+        playerControllerManager.myTeam = team; 
+
+ 
     }
 
     private void Update()
@@ -119,6 +121,7 @@ public class PlayerInfo : MonoBehaviour
     [PunRPC]
     void RPC_TeamKilled(int team)
     {
+        playerControllerManager.myTeam = team;
         if (team == 1)
         {
             RoomManager.blueScore++;
