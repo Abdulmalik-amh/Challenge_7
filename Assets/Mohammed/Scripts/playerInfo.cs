@@ -47,7 +47,7 @@ public class PlayerInfo : MonoBehaviour
         regenerationStartTime = Time.time + regenerationTime;
         animator = GetComponent<Animator>();
 
-        playerControllerManager.myTeam = team; 
+        //playerControllerManager.
 
  
     }
@@ -112,26 +112,26 @@ public class PlayerInfo : MonoBehaviour
 
                 Die();
                 PlayerControllerManager.Find(info.Sender).GetKill();
-                view.RPC("RPC_TeamKilled", RpcTarget.All, team);
+               // view.RPC("RPC_TeamKilled", RpcTarget.All, team);
             }
 
         }
     }
 
     [PunRPC]
-    void RPC_TeamKilled(int team)
-    {
-        playerControllerManager.myTeam = team;
-        if (team == 1)
-        {
-            RoomManager.blueScore++;
-        }
+    //void RPC_TeamKilled(int team)
+    //{
+    //    //playerControllerManager.myTeam = team;
+    //    if (team == 1)
+    //    {
+    //        RoomManager.blueScore++;
+    //    }
 
-        if (team == 2)
-        {
-            RoomManager.redScore++;
-        }
-    }
+    //    if (team == 2)
+    //    {
+    //        RoomManager.redScore++;
+    //    }
+    //}
 
     private void Die()
     {
