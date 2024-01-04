@@ -39,7 +39,7 @@ public class DamageDealer : MonoBehaviour
             {
                 Debug.Log("Hit Shield");
 
-                if (hit.transform.TryGetComponent(out CombatScript Aenemy))
+                if (hit.transform.root.TryGetComponent(out CombatScript Aenemy))
                 {
                     Debug.Log("CombatScript found on the hit object");
                     // Handle the case where the hit object has the "Shield" tag
