@@ -24,6 +24,7 @@ public class PlayerInfo : MonoBehaviour
     PhotonView view;
 
     PlayerControllerManager playerControllerManager;
+    int team = 0;
 
     private void Awake()
     {
@@ -45,6 +46,8 @@ public class PlayerInfo : MonoBehaviour
         // Set the initial regeneration start time
         regenerationStartTime = Time.time + regenerationTime;
         animator = GetComponent<Animator>();
+
+        team = (int)PhotonNetwork.LocalPlayer.CustomProperties["whichteam"];
     }
 
     private void Update()
@@ -101,8 +104,29 @@ public class PlayerInfo : MonoBehaviour
 
         if (health <= 0)
         {
-            Die();
-            PlayerControllerManager.Find(info.Sender).GetKill();
+            if (view.IsMine)
+            {
+
+
+                Die();
+                PlayerControllerManager.Find(info.Sender).GetKill();
+                view.RPC("RPC_TeamKilled", RpcTarget.All, team);
+            }
+
+        }
+    }
+
+    [PunRPC]
+    void RPC_TeamKilled(int team)
+    {
+        if (team == 1)
+        {
+            RoomManager.blueScore++;
+        }
+
+        if (team == 2)
+        {
+            RoomManager.redScore++;
         }
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -14,8 +15,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public Transform[] spawnPointsTeamOne;
     public Transform[] spawnPointsTeamTwo;
 
+    public static int blueScore = 0;
+    public static int redScore = 0;
+    public Text blueScoreText;
+    public Text redScoreText;
+
     private void Awake()
     {
+        SetScoreText();
         if (Instance)
         {
             Destroy(gameObject);
@@ -45,6 +52,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
+    private void Update()
+    {
+        SetScoreText();
+    }
     public void uodateTeam()
     {
         if (nextPlayerteam == 1)
@@ -55,5 +66,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             nextPlayerteam = 1;
         }
+    }
+
+    void SetScoreText()
+    {
+        blueScoreText.text = blueScore.ToString();
+        redScoreText.text = redScore.ToString();
     }
 }

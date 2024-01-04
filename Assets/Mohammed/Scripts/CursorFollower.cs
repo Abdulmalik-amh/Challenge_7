@@ -16,7 +16,7 @@ public class CursorFollower : MonoBehaviour
     void Update()
     {
         if (!view.IsMine)
-            return;
+            Destroy(gameObject);
 
         // Get the current mouse position in screen coordinates
         Vector3 mousePosition = Input.mousePosition;

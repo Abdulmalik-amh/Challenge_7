@@ -6,6 +6,7 @@ using System.IO;
 using Photon.Realtime;
 using System.Linq;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using UnityEngine.UI;
 
 public class PlayerControllerManager : MonoBehaviour
 {
@@ -15,8 +16,13 @@ public class PlayerControllerManager : MonoBehaviour
 
     int kills;
     int deaths;
+
+    public static PlayerControllerManager instance;
+
+
     private void Awake()
     {
+        instance = this;
         view = GetComponent<PhotonView>();
     }
 
