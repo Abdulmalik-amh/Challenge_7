@@ -17,7 +17,7 @@ public class rigScripts : MonoBehaviour
     void Start()
     {
         if (!view.IsMine)
-            return;
+            Destroy(gameObject);
     }
 
     // Update is called once per frame

@@ -5,6 +5,7 @@ public class DamageDealer : MonoBehaviour
 {
     PlayerInfo playerInfo;
     CombatScript combatScript;
+    EnemyLockOn enemyLockOn;
 
     bool canDealDamage;
     List<GameObject> hasDealtDamage;
@@ -18,6 +19,7 @@ public class DamageDealer : MonoBehaviour
 
         playerInfo = GetComponentInParent<PlayerInfo>();
         combatScript = GetComponentInParent<CombatScript>();
+        enemyLockOn = GetComponent<EnemyLockOn>();
     }
 
     void Update()
@@ -35,7 +37,7 @@ public class DamageDealer : MonoBehaviour
             int layerMask = (1 << 10) + (1 << 9);
             if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
             {
-                if (hit.transform.TryGetComponent(out CombatScript Aenemy) && !hasDealtDamage.Contains(hit.transform.gameObject) && CompareTag("Shield"))
+                if (hit.transform.TryGetComponent(out CombatScript Aenemy))
                 {
                     // Handle the case where the hit object has the "Shield" tag
                     Debug.Log("Hit a block shield!");
@@ -68,6 +70,7 @@ public class DamageDealer : MonoBehaviour
         //Debug.Log("Start Dealing Damage");
         canDealDamage = true;
         hasDealtDamage.Clear();
+        enemyLockOn.FreezeTargetLock();
     }
 
     public void EndDealDamage()
@@ -75,6 +78,7 @@ public class DamageDealer : MonoBehaviour
         //Debug.Log("End Dealing Damage");
 
         canDealDamage = false;
+        enemyLockOn.UnfreezeTargetLock();
     }
 
     private void OnDrawGizmos()

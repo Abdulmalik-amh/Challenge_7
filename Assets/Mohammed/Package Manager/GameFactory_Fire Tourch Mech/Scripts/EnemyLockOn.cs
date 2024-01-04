@@ -26,6 +26,7 @@ public class EnemyLockOn : MonoBehaviour
     
     Transform cam;
     bool enemyLocked;
+    bool attacking;
     float currentYOffset;
     Vector3 pos;
 
@@ -269,24 +270,40 @@ public class EnemyLockOn : MonoBehaviour
 
     private void LookAtTarget()
     {
-        if(currentTarget == null) {
+        if (currentTarget == null)
+        {
             ResetTarget();
             return;
         }
-        pos = currentTarget.position + new Vector3(0, currentYOffset, 0);
-        lockOnCanvas.position = pos;
-        lockOnCanvas.localScale = Vector3.one * ((cam.position - pos).magnitude * crossHair_Scale);
 
-        enemyTarget_Locator.position = pos;
-        Vector3 dir = currentTarget.position - transform.position;
-        dir.y = 0;
-        Quaternion rot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * lookAtSmoothing);
+        if (!attacking)
+        {
+            // Only update the rotation when the player cannot deal damage
+            pos = currentTarget.position + new Vector3(0, currentYOffset, 0);
+            lockOnCanvas.position = pos;
+            lockOnCanvas.localScale = Vector3.one * ((cam.position - pos).magnitude * crossHair_Scale);
+
+            enemyTarget_Locator.position = pos;
+            Vector3 dir = currentTarget.position - transform.position;
+            dir.y = 0;
+            Quaternion rot = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * lookAtSmoothing);
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, noticeZone);   
+    }
+
+    public void FreezeTargetLock()
+    {
+        attacking = true;
+    }
+
+    public void UnfreezeTargetLock()
+    {
+        attacking = false;
     }
 
     public bool IsTargeting()
