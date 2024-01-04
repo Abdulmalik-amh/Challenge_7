@@ -31,11 +31,13 @@ public class DamageDealer : MonoBehaviour
         if (canDealDamage)
         {
             RaycastHit hit;
+
             int ShieldMask = (1 << 12);
             // Combine layers 9 and 10 in the layer mask
             int layerMask = (1 << 10) + (1 << 9);
             if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
             {
+                Debug.Log("Hit Shield");
                 if (hit.transform.TryGetComponent(out CombatScript Aenemy))
                 {
                     // Handle the case where the hit object has the "Shield" tag
