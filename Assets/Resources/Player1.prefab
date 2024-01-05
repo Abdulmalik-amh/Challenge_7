@@ -133,8 +133,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236601604900660993}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.085433684, y: 0.9665839, z: -0.16888078, w: -0.17290479}
-  m_LocalPosition: {x: 1.0641598, y: 0.61740744, z: 2.3979979}
+  m_LocalRotation: {x: -0.085127376, y: 0.9651541, z: -0.16955683, w: -0.18022627}
+  m_LocalPosition: {x: 1.1040206, y: 0.6222467, z: 2.376502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4806,6 +4806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponLength: 0.65
   weaponDamage: 50
+  team: 2
 --- !u!1 &5825340216496457674
 GameObject:
   m_ObjectHideFlags: 0
