@@ -33,7 +33,8 @@ public class PlayerControllerManager : MonoBehaviour
             
             view.RPC("RPC_GetTeam", RpcTarget.MasterClient);
         }
-        
+
+        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = myTeam;
     }
 
     private void Update()
@@ -94,6 +95,7 @@ public class PlayerControllerManager : MonoBehaviour
         Hashtable hash = new Hashtable();
         hash.Add("kills", kills);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+
     }
 
     [PunRPC]

@@ -32,6 +32,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Instance = this;
     }
 
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -68,7 +69,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
-    void SetScoreText()
+   public void SetScoreText()
     {
         blueScoreText.text = blueScore.ToString();
         redScoreText.text = redScore.ToString();
