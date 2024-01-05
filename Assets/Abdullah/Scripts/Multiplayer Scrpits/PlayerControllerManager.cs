@@ -47,7 +47,7 @@ public class PlayerControllerManager : MonoBehaviour
         }
     }
 
-    void CreatController()
+    public void CreatController()
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
         {

@@ -1,9 +1,11 @@
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using static Photon.Pun.UtilityScripts.PunTeams;
+using ExitGames.Client.Photon;
 
-public class PlayerInfo : MonoBehaviour
+public class PlayerInfo : MonoBehaviour, IOnEventCallback
 {
     Animator animator;
 
@@ -111,11 +113,13 @@ public class PlayerInfo : MonoBehaviour
             if (view.IsMine)
             {
 
+                PlayerControllerManager.Find(info.Sender).GetKill();
                 view.RPC("RPC_TeamKilled", RpcTarget.All, team);
                 Die();
-                PlayerControllerManager.Find(info.Sender).GetKill();
+                
                
             }
+          
 
         }
     }
@@ -191,5 +195,29 @@ public class PlayerInfo : MonoBehaviour
     {
         animator.SetTrigger("Kicked");
         TakeDamage(10f);
+    }
+
+    //will Fight when event is Activated
+    public void OnEvent(EventData photonEvent)
+    {
+        if (photonEvent.Code == RoomManager.RestartGamEventCode)
+        {
+
+            RoomManager.redScore = 0;
+            RoomManager.blueScore = 0;
+            health = 100;
+            playerControllerManager.CreatController();
+
+        }
+    }
+
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
     }
 }

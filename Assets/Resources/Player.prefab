@@ -4806,7 +4806,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponLength: 0.65
   weaponDamage: 50
-  team: 1
 --- !u!1 &5825340216496457674
 GameObject:
   m_ObjectHideFlags: 0
