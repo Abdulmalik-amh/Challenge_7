@@ -33,22 +33,22 @@ public class DamageDealer : MonoBehaviour
             RaycastHit hit;
 
             int ShieldMask = (1 << 12);
-            // Combine layers 9 and 10 in the layer mask
             int layerMask = (1 << 10) + (1 << 9);
-            if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
+
+            // Exclude the GameObject to which this script is attached
+            layerMask = ~layerMask;
+
+            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
             {
                 Debug.Log("Hit Shield");
 
                 if (hit.transform.root.TryGetComponent(out CombatScript Aenemy))
                 {
                     Debug.Log("CombatScript found on the hit object");
-                    // Handle the case where the hit object has the "Shield" tag
                     Debug.Log("Hit a block shield!");
                     Aenemy.getBlocked();
                     combatScript.CancleAttack();
                     combatScript.HitVFX(hit.point);
-
-                    // You may want to add further logic for shield interactions here
                 }
                 else
                 {
@@ -57,15 +57,13 @@ public class DamageDealer : MonoBehaviour
             }
             else if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
-                    // Check if the hit object is an enemy and hasn't received damage yet
-                    if (hit.transform.TryGetComponent(out PlayerInfo Benemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
-                    {
-                        Benemy.TakeDamage(weaponDamage);
-                        Debug.Log("Damage dealt: " + weaponDamage);
-                        Benemy.HitVFX(hit.point);
-                        hasDealtDamage.Add(hit.transform.gameObject);
-                    }
-                
+                if (hit.transform != null && hit.transform != transform && hit.transform.TryGetComponent(out PlayerInfo Benemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                {
+                    Benemy.TakeDamage(weaponDamage);
+                    Debug.Log("Damage dealt: " + weaponDamage);
+                    Benemy.HitVFX(hit.point);
+                    hasDealtDamage.Add(hit.transform.gameObject);
+                }
             }
         }
     }
