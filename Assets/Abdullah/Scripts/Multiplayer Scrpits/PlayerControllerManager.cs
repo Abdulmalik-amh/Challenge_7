@@ -15,8 +15,8 @@ public class PlayerControllerManager : MonoBehaviour
     public GameObject myPlayer;
     public int myTeam;
 
-    int kills;
-    int deaths;
+   public  int kills;
+    public int deaths;
 
     public static PlayerControllerManager instance;
 

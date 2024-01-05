@@ -205,8 +205,10 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
 
             RoomManager.redScore = 0;
             RoomManager.blueScore = 0;
-            health = 100;
+            //health = 100;
             playerControllerManager.CreatController();
+            playerControllerManager.kills = 0;
+            playerControllerManager.deaths = 0;
 
         }
     }
