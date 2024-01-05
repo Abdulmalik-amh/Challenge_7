@@ -43,7 +43,7 @@ public class DamageDealer : MonoBehaviour
             {
                 if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, frindlyMask))
                 {
-                    return;
+                    Debug.Log("Hit self");
                 }
                 else
                 {
