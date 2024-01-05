@@ -108,6 +108,8 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
         //health = Mathf.Clamp(health, 0, maxHealth);
         animator.SetTrigger("getHit");
 
+        //( ADD SOUND : GETTING HIT )
+
         if (health <= 0)
         {
             if (view.IsMine)
@@ -143,6 +145,8 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
     private void Die()
     {
         playerControllerManager.Die();
+
+        //( ADD SOUND: DIED)
     }
 
     public bool TakeStamina(float staminaCost)
@@ -160,6 +164,8 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
                 // If stamina reaches 0, restart the regeneration wait time with double duration
                 isStaminaRegenerating = false;
                 regenerationStartTime = Time.time + regenerationTime * dashInterruptRegenTimeMultiplier;
+
+                //( ADD SOUND : EXIUSTED)
             }
         }
         else
@@ -195,6 +201,8 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
     {
         animator.SetTrigger("Kicked");
         TakeDamage(10f);
+
+        //(ADD SOUND : KICK SOUND)
     }
 
     //will Fight when event is Activated

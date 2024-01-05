@@ -49,6 +49,7 @@ public class DamageDealer : MonoBehaviour
                     combatScript.CancleAttack();
                     combatScript.HitVFX(hit.point);
 
+                    // (ADD SOUND: SOWRD BLOCKED BY SHIELD)
                     // You may want to add further logic for shield interactions here
                 }
                 else
@@ -65,6 +66,8 @@ public class DamageDealer : MonoBehaviour
                         Debug.Log("Damage dealt: " + weaponDamage);
                         Benemy.HitVFX(hit.point);
                         hasDealtDamage.Add(hit.transform.gameObject);
+                    //(ADD SOUND: SOWRD SLASHED PLAYER)
+
                     }
                 
             }

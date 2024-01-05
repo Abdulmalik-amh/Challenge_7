@@ -113,6 +113,7 @@ public class DefMovement : MonoBehaviour
         if (moveInput.magnitude > 0 && Keyboard.current.spaceKey.wasPressedThisFrame && lockMovement && playerInfo.stamina > 0)
         {
             StartDash();
+            //(ADD SOUND : DASH)
         }
 
     }

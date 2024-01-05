@@ -56,6 +56,8 @@ public class CombatScript : MonoBehaviour
                 playerInfo.TakeStamina(attack_Stamina);
                 isAttack = true;
                 abletoAttack = false;
+
+                //( ADD SOUND : ATTACKING )
             }
         }
         
@@ -70,6 +72,8 @@ public class CombatScript : MonoBehaviour
             parryHitbox.SetActive(true);
             // Set a cooldown before the player can parry again
             parryCooldown = Time.time + parryHitboxDuration + 2.0f; // You can adjust the cooldown duration
+
+            // (ADD SOUND : BLOCKING)
 
         }
         else if (!Input.GetMouseButton(1))
@@ -144,6 +148,8 @@ public class CombatScript : MonoBehaviour
     public void getBlocked()
     {
         animator.SetTrigger("Blocked");
+
+        // (ADD SOUND : BLOCKED ATTACK)
     }
 
     public void HitVFX(Vector3 hitPosition)
