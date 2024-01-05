@@ -12,8 +12,7 @@ public class DamageDealer : MonoBehaviour
 
     [SerializeField] float weaponLength;
     [SerializeField] float weaponDamage;
-    [SerializeField] int team; // Team 1 or Team 2
-
+    [SerializeField] int team;
     void Start()
     {
         canDealDamage = false;
@@ -34,42 +33,54 @@ public class DamageDealer : MonoBehaviour
         {
             RaycastHit hit;
 
-            int teamLayerMask = (team == 1) ? (1 << 9) : (1 << 10);
-            int shieldMask = (1 << 12);
+            int ShieldMask = (1 << 12);
+            // Combine layers 9 and 10 in the layer mask
 
-            // Exclude the GameObject to which this script is attached
             int layerMask = ~((team == 1) ? (1 << 10) : (1 << 9));
+            int frindlyMask = ~((team == 1) ? (1 << 9) : (1 << 10));
 
-            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, shieldMask))
+            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
             {
-                Debug.Log("Hit Shield");
-
-                if (hit.transform.root.TryGetComponent(out CombatScript enemyCombatScript))
+                if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, frindlyMask))
                 {
-                    Debug.Log("CombatScript found on the hit object");
-                    Debug.Log("Hit a block shield!");
-                    enemyCombatScript.getBlocked();
-                    combatScript.CancleAttack();
-                    combatScript.HitVFX(hit.point);
+                    return;
                 }
                 else
                 {
-                    Debug.Log("CombatScript not found on the hit object");
+                    Debug.Log("Hit Shield");
+
+                    if (hit.transform.root.TryGetComponent(out CombatScript Aenemy))
+                    {
+                        Debug.Log("CombatScript found on the hit object");
+                        // Handle the case where the hit object has the "Shield" tag
+                        Debug.Log("Hit a block shield!");
+                        Aenemy.getBlocked();
+                        combatScript.CancleAttack();
+                        combatScript.HitVFX(hit.point);
+
+                        // You may want to add further logic for shield interactions here
+                    }
+                    else
+                    {
+                        Debug.Log("CombatScript not found on the hit object");
+                    }
                 }
+
             }
             else if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
-                if (hit.transform != null && hit.transform != transform && hit.transform.TryGetComponent(out PlayerInfo enemyPlayerInfo) && !hasDealtDamage.Contains(hit.transform.gameObject))
-                {
-                    enemyPlayerInfo.TakeDamage(weaponDamage);
-                    Debug.Log("Damage dealt: " + weaponDamage);
-                    enemyPlayerInfo.HitVFX(hit.point);
-                    hasDealtDamage.Add(hit.transform.gameObject);
-                }
+                    // Check if the hit object is an enemy and hasn't received damage yet
+                    if (hit.transform.TryGetComponent(out PlayerInfo Benemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                    {
+                        Benemy.TakeDamage(weaponDamage);
+                        Debug.Log("Damage dealt: " + weaponDamage);
+                        Benemy.HitVFX(hit.point);
+                        hasDealtDamage.Add(hit.transform.gameObject);
+                    }
+                
             }
         }
     }
-
 
 
 
