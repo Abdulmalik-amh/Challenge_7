@@ -7,6 +7,7 @@ using Photon.Realtime;
 using System.Linq;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using UnityEngine.UI;
+using static Photon.Pun.UtilityScripts.PunTeams;
 
 public class PlayerControllerManager : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class PlayerControllerManager : MonoBehaviour
         }
 
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = myTeam;
+
     }
 
     private void Update()
@@ -47,7 +49,14 @@ public class PlayerControllerManager : MonoBehaviour
 
     void CreatController()
     {
-            if (myTeam == 1)
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
+        {
+            PhotonNetwork.LocalPlayer.CustomProperties["Team"] = myTeam;
+        }
+
+        myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+
+        if (myTeam == 1)
             {
                 int spawnPicker = Random.Range(0, RoomManager.Instance.spawnPointsTeamOne.Length);
                 if (view.IsMine)

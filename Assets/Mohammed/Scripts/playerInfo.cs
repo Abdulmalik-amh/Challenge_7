@@ -1,5 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+using static Photon.Pun.UtilityScripts.PunTeams;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -109,10 +111,10 @@ public class PlayerInfo : MonoBehaviour
             if (view.IsMine)
             {
 
-
+                view.RPC("RPC_TeamKilled", RpcTarget.All, team);
                 Die();
                 PlayerControllerManager.Find(info.Sender).GetKill();
-               view.RPC("RPC_TeamKilled", RpcTarget.All, team);
+               
             }
 
         }
