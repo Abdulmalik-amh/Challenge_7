@@ -452,7 +452,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1.0000001}
     - name: mixamorig:Spine1
       parentName: mixamorig:Spine
-      position: {x: -0, y: 0.17121236, z: 3.264103e-10}
+      position: {x: 0, y: 0.085, z: -0.008}
       rotation: {x: -0.000000029802319, y: 0.00000006095356, z: 0.00000001303679,
         w: 1}
       scale: {x: 1.0000001, y: 1, z: 0.9999999}

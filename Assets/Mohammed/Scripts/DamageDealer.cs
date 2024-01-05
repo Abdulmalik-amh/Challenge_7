@@ -45,6 +45,7 @@ public class DamageDealer : MonoBehaviour
                     // Handle the case where the hit object has the "Shield" tag
                     Debug.Log("Hit a block shield!");
                     Aenemy.getBlocked();
+                    EndDealDamage();
                     combatScript.CancleAttack();
                     combatScript.HitVFX(hit.point);
 
