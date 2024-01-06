@@ -43,6 +43,7 @@ public class KickHandler : MonoBehaviour
                 if (hit.transform.TryGetComponent(out PlayerInfo Benemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
                 {
                     Benemy.Kicked();
+
                     hasDealtDamage.Add(hit.transform.gameObject);
                     //(ADD SOUND: SOWRD SLASHED PLAYER)
 
@@ -65,7 +66,7 @@ public class KickHandler : MonoBehaviour
 
 
 
-    public void StartKickDamage()
+    public void StartDealDamage()
     {
         //Debug.Log("Start Dealing Damage");
         canDealDamage = true;
@@ -73,7 +74,7 @@ public class KickHandler : MonoBehaviour
 
     }
 
-    public void EndKickDamage()
+    public void EndDealDamage()
     {
         //Debug.Log("End Dealing Damage");
 
