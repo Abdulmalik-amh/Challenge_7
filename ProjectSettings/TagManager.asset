@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shield
   - Parry
+  - bridge
   layers:
   - Default
   - TransparentFX

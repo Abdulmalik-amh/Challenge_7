@@ -31,8 +31,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip shieldBlockSound;
 
     //PlayerMovementChannel
-    public AudioSource MovementChannel;
+    public AudioSource MovementGroundChannel;
     public AudioClip MovementGround;
+    public AudioSource MovementBridgeChannel;
     public AudioClip MovementBridge;
 
     //Player hitted channel and sounds 
