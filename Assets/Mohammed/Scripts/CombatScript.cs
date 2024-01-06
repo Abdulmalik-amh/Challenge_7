@@ -58,6 +58,15 @@ public class CombatScript : MonoBehaviour
                 abletoAttack = false;
 
                 //( ADD SOUND : ATTACKING )
+                
+                int num = Random.Range(0,2);
+                if(num == 2)
+                    SoundManager.Instance.GruntChannel.PlayOneShot(SoundManager.Instance.playerAttackGrunt_1);
+                
+                
+                SoundManager.Instance.GruntChannel.PlayOneShot(SoundManager.Instance.playerAttackGrunt_2);
+                
+                
             }
         }
         
@@ -74,6 +83,7 @@ public class CombatScript : MonoBehaviour
             parryCooldown = Time.time + parryHitboxDuration + 2.0f; // You can adjust the cooldown duration
 
             // (ADD SOUND : BLOCKING)
+            SoundManager.Instance.shieldBlockingChannel.PlayOneShot(SoundManager.Instance.shieldRaiseSound);
 
         }
         else if (!Input.GetMouseButton(1))
@@ -150,6 +160,7 @@ public class CombatScript : MonoBehaviour
         animator.SetTrigger("Blocked");
 
         // (ADD SOUND : BLOCKED ATTACK)
+         //SoundManager.Instance.shieldBlockingChannel.PlayOneShot(SoundManager.Instance.shieldBlockSound);
     }
 
     public void HitVFX(Vector3 hitPosition)

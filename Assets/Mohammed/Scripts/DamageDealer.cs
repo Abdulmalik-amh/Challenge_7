@@ -50,6 +50,7 @@ public class DamageDealer : MonoBehaviour
                     combatScript.HitVFX(hit.point);
 
                     // (ADD SOUND: SOWRD BLOCKED BY SHIELD)
+                     SoundManager.Instance.shieldBlockingChannel.PlayOneShot(SoundManager.Instance.shieldBlockSound);
                     // You may want to add further logic for shield interactions here
                 }
                 else
@@ -67,7 +68,18 @@ public class DamageDealer : MonoBehaviour
                         Benemy.HitVFX(hit.point);
                         hasDealtDamage.Add(hit.transform.gameObject);
                     //(ADD SOUND: SOWRD SLASHED PLAYER)
+                    
+                        int num = Random.Range(0,3);
+                        if (num == 1)
+                            SoundManager.Instance.sowrdCutChannel.PlayOneShot(SoundManager.Instance.sowrdCut_2);
+                        
+                        if (num == 2)
+                            SoundManager.Instance.sowrdCutChannel.PlayOneShot(SoundManager.Instance.sowrdCut_3);
+                        
+                        if (num == 3)
+                            SoundManager.Instance.sowrdCutChannel.PlayOneShot(SoundManager.Instance.sowrdCut_1);
 
+                        
                     }
                 
             }

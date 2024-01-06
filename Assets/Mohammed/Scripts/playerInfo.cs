@@ -110,6 +110,12 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
 
         //( ADD SOUND : GETTING HIT )
 
+        int num = Random.Range(0,2);
+        if(num == 2)
+            SoundManager.Instance.gettingHitChannel.PlayOneShot(SoundManager.Instance.playerHitted_2);
+
+        SoundManager.Instance.gettingHitChannel.PlayOneShot(SoundManager.Instance.playerHitted_1);
+
         if (health <= 0)
         {
             if (view.IsMine)
@@ -147,6 +153,8 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
         playerControllerManager.Die();
 
         //( ADD SOUND: DIED)
+        SoundManager.Instance.DieChannel.PlayOneShot(SoundManager.Instance.DieSound);
+
     }
 
     public bool TakeStamina(float staminaCost)
@@ -166,8 +174,16 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
                 regenerationStartTime = Time.time + regenerationTime * dashInterruptRegenTimeMultiplier;
 
                 //( ADD SOUND : EXIUSTED)
+
+            SoundManager.Instance.exhaustedChannel.PlayOneShot(SoundManager.Instance.exhaustedSound);
+
             }
-        }
+
+            if(stamina == 1)
+                SoundManager.Instance.exhaustedChannel.Stop();
+
+            }
+
         else
         {
             Debug.Log("Not enough stamina!");
@@ -203,6 +219,8 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
         TakeDamage(10f);
 
         //(ADD SOUND : KICK SOUND)
+        SoundManager.Instance.kickChannel.PlayOneShot(SoundManager.Instance.kickSound);
+
     }
 
     //will Fight when event is Activated
