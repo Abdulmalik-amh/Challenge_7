@@ -19,7 +19,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource GruntChannel;
     public AudioClip playerAttackGrunt_1;
     public AudioClip playerAttackGrunt_2;
-    public AudioClip playerAttackGrunt_3;
+    
 
     //Player Dashing Channel
     public AudioSource dashChannel;
@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource gettingHitChannel;
     public AudioClip playerHitted_1;
     public AudioClip playerHitted_2;
-    public AudioClip playerHitted_3;
+   
    
    //Player Exhausted Channel
     public AudioSource exhaustedChannel;

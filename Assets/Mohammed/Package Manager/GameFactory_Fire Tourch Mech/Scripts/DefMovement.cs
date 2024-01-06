@@ -114,6 +114,7 @@ public class DefMovement : MonoBehaviour
         {
             StartDash();
             //(ADD SOUND : DASH)
+            SoundManager.Instance.dashChannel.PlayOneShot(SoundManager.Instance.dashSound);
         }
 
     }
