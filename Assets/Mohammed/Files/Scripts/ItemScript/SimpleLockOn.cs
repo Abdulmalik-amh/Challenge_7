@@ -11,14 +11,15 @@ public class SimpleLockOn : MonoBehaviour
     private void Awake()
     {
         view = GetComponent<PhotonView>();
-    }
-
-    private void Start()
-    {
         if (!view.IsMine)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        
     }
     void OnEnable(){
         if(target == null) target = Camera.main.transform;
