@@ -65,7 +65,7 @@ public class KickHandler : MonoBehaviour
 
 
 
-    public void StartDealDamage()
+    public void StartKickDamage()
     {
         //Debug.Log("Start Dealing Damage");
         canDealDamage = true;
@@ -73,7 +73,7 @@ public class KickHandler : MonoBehaviour
 
     }
 
-    public void EndDealDamage()
+    public void EndKickDamage()
     {
         //Debug.Log("End Dealing Damage");
 
