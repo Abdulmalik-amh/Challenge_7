@@ -6,9 +6,9 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance {get; set;}
     //ENV Channel
-    public AudioSource EnvironmentChannel;
-    public AudioClip WindSound;
-    public AudioClip RainSound;
+    // public AudioSource EnvironmentChannel;
+    // public AudioClip WindSound;
+    // public AudioClip RainSound;
 
     //PlayerHurtChannel includes CutSounds
     public AudioSource sowrdCutChannel;
