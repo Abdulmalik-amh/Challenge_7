@@ -218,7 +218,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 1.8
   m_Radius: 0.28
@@ -301,12 +301,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  maxStamina: 10000
+  maxStamina: 100
   staminaRegenRate: 5
   staminaRegenCooldown: 3
   hitVFX: {fileID: 1773777078157994072, guid: 5ee97ba44501f4ffd96c094ad4bd15a3, type: 3}
   health: 100
-  stamina: 75
+  stamina: 100
   regenerationTime: 1
   regenerationRate: 3
   dashInterruptRegenTimeMultiplier: 2
