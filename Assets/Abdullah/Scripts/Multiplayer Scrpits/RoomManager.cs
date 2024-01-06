@@ -81,20 +81,22 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             StartCoroutine(DisplayMessage("Red Team Win !!"));
             //if master client send restart event
-            if (PhotonNetwork.IsMasterClient)
-            {
+            
+          
                StartCoroutine(RestartGame());
-            }
+               
+
+           
         }
 
         if (blueScore >= 3)
         {
             StartCoroutine(DisplayMessage("Blue Team Win !!"));
             //if master client send restart event
-            if (PhotonNetwork.IsMasterClient)
-            {
+            
                 StartCoroutine(RestartGame());
-            }
+                 
+           
         }
     }
     public void uodateTeam()
@@ -118,11 +120,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     IEnumerator RestartGame()
     {
-        redScore = 0;
-        blueScore = 0;
+
         yield return new WaitForSeconds(3);
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
         ExitGames.Client.Photon.SendOptions sendOption = new ExitGames.Client.Photon.SendOptions { Reliability = true };
         PhotonNetwork.RaiseEvent(RestartGamEventCode,null,raiseEventOptions, sendOption);
+        Destroy(gameObject);
     }
 }

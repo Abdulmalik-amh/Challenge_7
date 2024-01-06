@@ -70,3 +70,5 @@ MonoBehaviour:
   view: {fileID: 5662429866268883975}
   myPlayer: {fileID: 0}
   myTeam: 0
+  kills: 0
+  deaths: 0

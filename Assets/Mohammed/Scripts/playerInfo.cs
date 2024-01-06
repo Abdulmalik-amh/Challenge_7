@@ -211,12 +211,16 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
         if (photonEvent.Code == RoomManager.RestartGamEventCode)
         {
 
-            RoomManager.redScore = 0;
-            RoomManager.blueScore = 0;
-            //health = 100;
-            playerControllerManager.CreatController();
-            playerControllerManager.kills = 0;
-            playerControllerManager.deaths = 0;
+            //RoomManager.redScore = 0;
+            //RoomManager.blueScore = 0;
+            ////health = 100;
+            //playerControllerManager.CreatController();
+            //playerControllerManager.kills = 0;
+            //playerControllerManager.deaths = 0;
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.DestroyPlayerObjects(playerControllerManager.myTeam, true);
+            PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.LoadLevel(0);
 
         }
     }
