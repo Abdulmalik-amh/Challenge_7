@@ -45,4 +45,9 @@ public class animationEvents : MonoBehaviour
         KickHandler.EndDealDamage();
         Debug.Log("endkick");
     }
+
+    public void MovementSound()
+    {
+        SoundManager.Instance.MovementGroundChannel.PlayOneShot(SoundManager.Instance.MovementGround);
+    }
 }

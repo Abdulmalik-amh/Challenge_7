@@ -138,7 +138,7 @@ public class DefMovement : MonoBehaviour
  
 
         controller.Move(velocity * Time.deltaTime);
-        SoundManager.Instance.MovementGroundChannel.PlayOneShot(SoundManager.Instance.MovementGround);
+        
 
         anim.SetFloat("Movement", dir.magnitude, 0.1f, Time.deltaTime);
         anim.SetFloat("Horizontal", moveInput.x, 0.1f, Time.deltaTime);
