@@ -9,7 +9,9 @@ public class CombatScript : MonoBehaviour
     PlayerInfo playerInfo;
 
     [SerializeField] GameObject currentWeapon;
+    [SerializeField] GameObject SideWeapon;
     [SerializeField] GameObject currentShield;
+    [SerializeField] GameObject sideShield;
     [SerializeField] GameObject parryHitbox;
     [SerializeField] GameObject hitVFX;
     // Add a boolean variable to track whether the block button is held down
@@ -41,6 +43,7 @@ public class CombatScript : MonoBehaviour
     {
         EnableAttack();
         Block();
+        holdWeapon();
         // Get cursor location for the Stance parameter
         int cursorLocation = enemyLockOn.GetCursorLocation();
         animator.SetInteger("Stance", cursorLocation);
@@ -167,5 +170,25 @@ public class CombatScript : MonoBehaviour
     {
         GameObject hit = Instantiate(hitVFX, hitPosition, Quaternion.identity);
         Destroy(hit, 1f);
+    }
+
+    public void holdWeapon()
+    {
+        if(enemyLockOn.IsTargeting())
+        {
+            currentWeapon.SetActive(true);
+            SideWeapon.SetActive(false);
+
+            currentShield.SetActive(true);
+            sideShield.SetActive(false);
+        }
+        else
+        {
+            currentWeapon.SetActive(false);
+            SideWeapon.SetActive(true);
+
+            currentShield.SetActive(false);
+            sideShield.SetActive(true);
+        }
     }
 }
