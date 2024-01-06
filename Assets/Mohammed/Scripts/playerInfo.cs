@@ -194,6 +194,28 @@ public class PlayerInfo : MonoBehaviour, IOnEventCallback
         return true;
     }
 
+    public bool AddStamina(float staminaAmount)
+    {
+        if (stamina < maxStamina)
+        {
+            stamina += staminaAmount;
+
+            // Clamp the stamina to ensure it doesn't exceed the maximum capacity
+            stamina = Mathf.Clamp(stamina, 0, maxStamina);
+
+            // Reset the stamina regeneration timer when stamina is added
+            staminaRegenTimer = staminaRegenCooldown;
+
+
+            return true;
+        }
+        else
+        {
+            Debug.Log("Stamina is already at maximum!");
+            return false;
+        }
+    }
+
     public void StartDash()
     {
         // If player dashes, interrupt regeneration

@@ -35,6 +35,18 @@ public class DamageDealer : MonoBehaviour
             int ShieldMask = (1 << 12);
             // Combine layers 9 and 10 in the layer mask
             int layerMask = (1 << 10) + (1 << 9);
+            int parryMask = (1<<11);
+            if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, parryMask))
+            {
+                if (hit.transform.root.TryGetComponent(out PlayerInfo Cenemy))
+                {
+                    Cenemy.AddStamina(10f);
+                }
+                else
+                {
+                    Debug.Log("CombatScript not found on the hit object");
+                }
+            }
             if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, ShieldMask))
             {
                 Debug.Log("Hit Shield");
