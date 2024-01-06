@@ -61,7 +61,7 @@ public class PlayerControllerManager : MonoBehaviour
                 int spawnPicker = Random.Range(0, RoomManager.Instance.spawnPointsTeamOne.Length);
                 if (view.IsMine)
                 {
-                myPlayer =  PhotonNetwork.Instantiate(Path.Combine("Player"), RoomManager.Instance.spawnPointsTeamOne[spawnPicker].position,
+                myPlayer =  PhotonNetwork.Instantiate(Path.Combine("PlayerRed"), RoomManager.Instance.spawnPointsTeamOne[spawnPicker].position,
                         RoomManager.Instance.spawnPointsTeamOne[spawnPicker].rotation, 0, new object[] { view.ViewID });
                 }
 
@@ -73,7 +73,7 @@ public class PlayerControllerManager : MonoBehaviour
                 int spawnPicker = Random.Range(0, RoomManager.Instance.spawnPointsTeamTwo.Length);
                 if (view.IsMine) 
                 {
-                myPlayer =  PhotonNetwork.Instantiate(Path.Combine("Player1"), RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].position,
+                myPlayer =  PhotonNetwork.Instantiate(Path.Combine("PlayerBlue"), RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].position,
                     RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].rotation, 0, new object[] {view.ViewID});
                 }
             }
