@@ -9,7 +9,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 using UnityEngine.UI;
 using static Photon.Pun.UtilityScripts.PunTeams;
 
-public class PlayerControllerManager : MonoBehaviour
+public class PlayerControllerManager : MonoBehaviourPunCallbacks
 {
    public PhotonView view;
     public GameObject myPlayer;
@@ -19,6 +19,8 @@ public class PlayerControllerManager : MonoBehaviour
     public int deaths;
 
     public static PlayerControllerManager instance;
+
+    private Dictionary<int, int> myTeams = new Dictionary<int, int>();
 
 
     private void Awake()
@@ -32,16 +34,16 @@ public class PlayerControllerManager : MonoBehaviour
         if (view.IsMine)
         {
             
-            view.RPC("RPC_GetTeam", RpcTarget.MasterClient);
+            //view.RPC("RPC_GetTeam", RpcTarget.MasterClient);
         }
 
-        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = myTeam;
+       // PhotonNetwork.LocalPlayer.CustomProperties["Team"] = myTeam;
 
     }
 
     private void Update()
     {
-        if (myPlayer == null &&  myTeam != 0)
+        if (myPlayer == null)
         {
             CreatController();
         }
@@ -51,35 +53,40 @@ public class PlayerControllerManager : MonoBehaviour
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
         {
-            PhotonNetwork.LocalPlayer.CustomProperties["Team"] = myTeam;
+            //PhotonNetwork.LocalPlayer.CustomProperties["Team"] = myTeam;
+            myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+            
         }
 
-        myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+        AssignPlayerToSpownArea(myTeam);
 
-        if (myTeam == 1)
-            {
-                int spawnPicker = Random.Range(0, RoomManager.Instance.spawnPointsTeamOne.Length);
-                if (view.IsMine)
-                {
-                myPlayer =  PhotonNetwork.Instantiate(Path.Combine("PlayerRed"), RoomManager.Instance.spawnPointsTeamOne[spawnPicker].position,
-                        RoomManager.Instance.spawnPointsTeamOne[spawnPicker].rotation, 0, new object[] { view.ViewID });
-                }
-
-
-            }
-
-            else
-            {
-                int spawnPicker = Random.Range(0, RoomManager.Instance.spawnPointsTeamTwo.Length);
-                if (view.IsMine) 
-                {
-                myPlayer =  PhotonNetwork.Instantiate(Path.Combine("PlayerBlue"), RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].position,
-                    RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].rotation, 0, new object[] {view.ViewID});
-                }
-            }
-        
     }
 
+    void AssignPlayerToSpownArea(int team)
+    {
+
+        if (myTeam == 1)
+        {
+            int spawnPicker = Random.Range(0, RoomManager.Instance.spawnPointsTeamOne.Length);
+            if (view.IsMine)
+            {
+                myPlayer = PhotonNetwork.Instantiate(Path.Combine("PlayerRed"), RoomManager.Instance.spawnPointsTeamOne[spawnPicker].position,
+                        RoomManager.Instance.spawnPointsTeamOne[spawnPicker].rotation, 0, new object[] { view.ViewID });
+            }
+
+
+        }
+
+        else
+        {
+            int spawnPicker = Random.Range(0, RoomManager.Instance.spawnPointsTeamTwo.Length);
+            if (view.IsMine)
+            {
+                myPlayer = PhotonNetwork.Instantiate(Path.Combine("PlayerBlue"), RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].position,
+                    RoomManager.Instance.spawnPointsTeamTwo[spawnPicker].rotation, 0, new object[] { view.ViewID });
+            }
+        }
+    }
     public void Die()
     {
         PhotonNetwork.Destroy(myPlayer);
@@ -107,18 +114,38 @@ public class PlayerControllerManager : MonoBehaviour
 
     }
 
-    [PunRPC]
-    void RPC_GetTeam()
+    //[PunRPC]
+    //void RPC_GetTeam()
+    //{
+    //    myTeam = RoomManager.Instance.nextPlayerteam;
+    //    RoomManager.Instance.uodateTeam();
+    //    view.RPC("RPC_SentTeam", RpcTarget.OthersBuffered, myTeam);
+    //}
+
+    //[PunRPC]
+    //void RPC_SentTeam(int whichteam)
+    //{
+    //    myTeam = whichteam;
+    //}
+
+    void AssignTeamToAllPlayers()
     {
-        myTeam = RoomManager.Instance.nextPlayerteam;
-        RoomManager.Instance.uodateTeam();
-        view.RPC("RPC_SentTeam", RpcTarget.OthersBuffered, myTeam);
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties.ContainsKey("Team"))
+            {
+                int team = (int)player.CustomProperties["Team"];
+                myTeams[player.ActorNumber] = team;
+                Debug.Log(player.NickName + "team n: " + team);
+
+
+            }
+        }
     }
 
-    [PunRPC]
-    void RPC_SentTeam(int whichteam)
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
-        myTeam = whichteam;
+        AssignTeamToAllPlayers();
     }
 
     public static PlayerControllerManager Find(Player player)

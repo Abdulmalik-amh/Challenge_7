@@ -25,6 +25,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public Text errorTextToJoinRoom;
     public Animator anim;
 
+    int nextTeamNumber = 1;
+
 
     void Awake()
     {
@@ -76,7 +78,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         MenuManager.instance.OpenMenu("RoomMenu");
-        roomNameText.text = PhotonNetwork.CurrentRoom.Name  +"'s Room";
+        roomNameText.text = PhotonNetwork.CurrentRoom.Name;
    
 
         Player[] players = PhotonNetwork.PlayerList;
@@ -88,7 +90,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < players.Count(); i++) 
         {
-            Instantiate(playerListItemPrefab, playerListContant).GetComponent<PlayerListItem>().SetUp(players[i]);
+            int teamNumber = GetNextTeamNumber();
+
+            Instantiate(playerListItemPrefab, playerListContant).GetComponent<PlayerListItem>().SetUp(players[i], teamNumber);
         }
 
         startButton.SetActive(PhotonNetwork.IsMasterClient);
@@ -164,7 +168,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Instantiate(playerListItemPrefab, playerListContant).GetComponent<PlayerListItem>().SetUp(newPlayer);
+
+        int teamNumber = GetNextTeamNumber();
+        GameObject playerItem = Instantiate(playerListItemPrefab, playerListContant);
+        playerItem.GetComponent<PlayerListItem>().SetUp(newPlayer, teamNumber);
     }
 
     IEnumerator  StartGameCount()
@@ -185,5 +192,11 @@ public class Launcher : MonoBehaviourPunCallbacks
         errorTextToJoinRoom.text = "";
     }
 
+    private int GetNextTeamNumber()
+    {
+        int teamNumber = nextTeamNumber;
+        nextTeamNumber = 3 - nextTeamNumber;
+        return teamNumber;
+    }
 
 }
